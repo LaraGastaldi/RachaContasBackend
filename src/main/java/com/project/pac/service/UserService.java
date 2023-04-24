@@ -5,7 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.project.pac.model.User;
+import com.project.pac.bean.UserBean;
+import com.project.pac.factory.UserFactory;
 import com.project.pac.repository.UserRepository;
 
 @Service
@@ -14,11 +15,11 @@ public class UserService {
 	@Autowired
 	UserRepository userRepository;
 	
-	public List<User> findAll(){
-		return userRepository.findAll();
+	public List<UserBean> findAll(){
+		return new UserFactory().buildBeanList(userRepository.findAll());
 	}
 	
-	public User findById(Long id){
-		return userRepository.findById(id).get();
+	public UserBean findById(Long id){
+		return new UserFactory().buildBean(userRepository.findById(id).get());
 	}
 }
