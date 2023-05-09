@@ -5,11 +5,10 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class UserBean {
-
+public class BankBean {
+	
 	private Long id;
-	private String userName;
-	private String password;
-	private Long cnpj;
-		
+	private String bankCode;
+	private String bankName;
+	
 }

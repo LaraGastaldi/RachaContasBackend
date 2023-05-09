@@ -19,14 +19,14 @@ public class UserFactory {
 	}
 	
 	public UserBean buildBean(UserModel model) {
-		UserBean bean =  new UserBean();
-		
-		bean.setId(model.getId());
-		bean.setUserName(model.getUserName());
-		bean.setPassword(model.getPassword());
-		bean.setCnpj(model.getCnpj());
-		
-		return bean;
-	}
+        UserBean bean =  new UserBean();
+
+        bean.setId(model.getId());
+        bean.setUserName(model.getUserName());
+        bean.setPassword(model.getPassword());
+        bean.setCnpj(model.getCnpj());
+
+        return bean;
+    }
 
 }

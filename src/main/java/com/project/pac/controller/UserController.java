@@ -15,7 +15,7 @@ import com.project.pac.service.UserService;
 
 @RestController
 @RequestMapping(value="/user")
-public class UserContoller {
+public class UserController {
 
 	@Autowired
 	UserService userService;
