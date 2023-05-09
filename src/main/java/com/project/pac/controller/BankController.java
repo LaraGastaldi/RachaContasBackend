@@ -8,23 +8,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.project.pac.bean.UserBean;
-import com.project.pac.service.UserService;
+import com.project.pac.bean.BankBean;
+import com.project.pac.service.BankService;
 
 @RestController
-@RequestMapping(value="/user")
-public class UserContoller {
-
+@RequestMapping(value="/bank")
+public class BankController {
+	
 	@Autowired
-	UserService userService;
+	BankService bankService;
 	
 	@GetMapping(path="/findAll")
-	public List<UserBean> findAll(){
-		return userService.findAll();
+	public List<BankBean> findAll(){
+		return bankService.findAll();
 	}
 	
 	@GetMapping(path="/find")
-	public UserBean findById(@RequestParam("id") Long id){
-		return userService.findById(id);
+	public BankBean findById(@RequestParam("id") Long id){
+		return bankService.findById(id);
 	}
 }

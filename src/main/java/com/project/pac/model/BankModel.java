@@ -12,21 +12,16 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 @NoArgsConstructor
-@Table(name="user", schema = "public")
-public class UserModel {
-
+@Table(name="bank", schema = "public")
+public class BankModel {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id_user")
+	@Column(name="id_bank")
 	private Long id;
 	
-	@Column(name="user_name")
-	private String userName;
+	@Column(name="bank_code")
+	private String bankCode;
 	
-	@Column(name="password")
-	private String password;
-	
-	@Column(name="cnpj")
-	private Long cnpj;
-	
+	@Column(name="bank_name")
+	private String bankName;
 }
