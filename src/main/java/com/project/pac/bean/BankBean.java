@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 public class BankBean {
 	
 	private Long id;
-	private String bankCode;
+	private Long bankCode;
 	private String bankName;
 	
 }

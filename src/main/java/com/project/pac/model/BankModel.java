@@ -20,7 +20,7 @@ public class BankModel {
 	private Long id;
 	
 	@Column(name="bank_code")
-	private String bankCode;
+	private Long bankCode;
 	
 	@Column(name="bank_name")
 	private String bankName;
