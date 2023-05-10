@@ -27,5 +27,15 @@ public class BankFactory {
 
         return bean;
     }
+
+	public BankModel buildModel(BankBean bean) {
+		BankModel model =  new BankModel();
+
+        model.setId(bean.getId());
+        model.setBankCode(bean.getBankCode());
+        model.setBankName(bean.getBankName());
+
+        return model;
+	}
 	
 }

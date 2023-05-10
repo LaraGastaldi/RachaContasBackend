@@ -27,4 +27,14 @@ public class CategoryFactory{
 		
 		return bean;
 	}
+
+	public CategoryModel buildModel(CategoryBean bean) {
+		CategoryModel model =  new CategoryModel();
+		
+		model.setId(bean.getId());
+		model.setName(bean.getName());
+		model.setDescription(bean.getDescription());
+		
+		return model;
+	}
 }
