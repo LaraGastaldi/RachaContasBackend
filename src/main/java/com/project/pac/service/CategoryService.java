@@ -34,4 +34,19 @@ public class CategoryService {
 		CategoryBean entity = new CategoryFactory().buildBean(categoryRepository.save(new CategoryFactory().buildModel(bean))); 
 		return entity;
 	}
+
+	public CategoryBean update(CategoryBean category) throws Exception {
+		CategoryBean savedBean = new CategoryBean();
+		if(!categoryRepository.findById(category.getId()).isEmpty()) {
+			savedBean = this.save(category);
+		}else {
+			throw new Exception("Category not found");
+		}
+		
+		return savedBean;
+	}
+	
+	public void deleteByIds(List<Long> categoryIds) throws Exception {
+		categoryRepository.deleteAllById(categoryIds);
+	}
 }

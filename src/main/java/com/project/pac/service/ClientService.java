@@ -34,4 +34,19 @@ public class ClientService {
 		ClientBean entity = new ClientFactory().buildBean(clientRepository.save(new ClientFactory().buildModel(bean))); 
 		return entity;
 	}
+
+	public ClientBean update(ClientBean client) throws Exception {
+		ClientBean savedBean = new ClientBean();
+		if(!clientRepository.findById(client.getId()).isEmpty()) {
+			savedBean = this.save(client);
+		}else {
+			throw new Exception("Client not found");
+		}
+		
+		return savedBean;
+	}
+	
+	public void deleteByIds(List<Long> clientIds) throws Exception {
+		clientRepository.deleteAllById(clientIds);
+	}
 }
