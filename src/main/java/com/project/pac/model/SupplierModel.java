@@ -23,5 +23,5 @@ public class SupplierModel {
 	private Long idUser;
 	
 	@Column(name="cnpj")
-	private String cnpj;
+	private Long cnpj;
 }

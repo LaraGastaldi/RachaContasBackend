@@ -9,5 +9,5 @@ public class SupplierBean {
 
 	private Long id;
 	private Long idUser;
-	private String cnpj;
+	private Long cnpj;
 }

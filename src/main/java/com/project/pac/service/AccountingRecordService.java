@@ -38,4 +38,19 @@ public class AccountingRecordService {
 		AccountingRecordBean entity = new AccountingRecordFactory().buildBean(accountingRecordRepository.save(new AccountingRecordFactory().buildModel(bean))); 
 		return entity;
 	}
+
+	public AccountingRecordBean update(AccountingRecordBean accountingBean) throws Exception {
+		AccountingRecordBean savedBean = new AccountingRecordBean();
+		if(!accountingRecordRepository.findById(accountingBean.getId()).isEmpty()) {
+			savedBean = this.save(accountingBean);
+		}else {
+			throw new Exception("Accouting not found");
+		}
+		
+		return savedBean;
+	}
+	
+	public void deleteByIds(List<Long> clientIds) throws Exception {
+		accountingRecordRepository.deleteAllById(clientIds);
+	}
 }
