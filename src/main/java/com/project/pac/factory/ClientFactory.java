@@ -25,6 +25,7 @@ public class ClientFactory {
         bean.setIdUser(model.getIdUser());
         bean.setName(model.getName());
         bean.setCnpj(model.getCnpj());
+        bean.setPhone(model.getPhone());
 
         return bean;
     }
@@ -36,6 +37,7 @@ public class ClientFactory {
         model.setIdUser(bean.getIdUser());
         model.setName(bean.getName());
         model.setCnpj(bean.getCnpj());
+        model.setPhone(bean.getPhone());
 
         return model;
 	}

@@ -24,4 +24,11 @@ public class SupplierModel {
 	
 	@Column(name="cnpj")
 	private Long cnpj;
+	
+	@Column(name="name")
+	private String name;
+	
+	@Column(name="phone")
+	private String phone;
+	
 }

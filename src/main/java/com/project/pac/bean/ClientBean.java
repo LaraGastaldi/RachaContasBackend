@@ -9,4 +9,5 @@ public class ClientBean {
 	private Long idUser;
 	private Long cnpj;
 	private String name;
+	private String phone;
 }

@@ -53,5 +53,5 @@ public class AccountingRecordModel {
 	private Float value;
 	
 	@Column(name="type")
-	private boolean type;
+	private Boolean type;
 }

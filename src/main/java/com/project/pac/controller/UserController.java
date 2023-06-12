@@ -31,7 +31,7 @@ public class UserController {
 	}
 	
 	@PostMapping(path="/login")
-	public Boolean login(@RequestBody UserBean user) {
+	public UserBean login(@RequestBody UserBean user) {
 		return userService.login(user);
 	}
 }

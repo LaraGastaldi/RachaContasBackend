@@ -32,7 +32,7 @@ public class AccountingRecordFactory {
         bean.setMaturityDate(model.getMaturityDate());
         bean.setObservation(model.getObservation());
         bean.setValue(model.getValue());
-        bean.setType(model.isType());
+        bean.setType(model.getType());
 
         return bean;
     }
@@ -51,7 +51,7 @@ public class AccountingRecordFactory {
         model.setMaturityDate(bean.getMaturityDate());
         model.setObservation(bean.getObservation());
         model.setValue(bean.getValue());
-        model.setType(bean.isType());
+        model.setType(bean.getType());
         
         return model;
 	}

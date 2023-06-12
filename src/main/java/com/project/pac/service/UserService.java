@@ -24,15 +24,14 @@ public class UserService {
 		return new UserFactory().buildBean(userRepository.findById(id).get());
 	}
 	
-	public Boolean login(UserBean user) {
-		Boolean result = false;
-		
+	public UserBean login(UserBean user) {
 		UserModel userModel = userRepository.findByUserNameAndPassword(user.getUserName(), user.getPassword());
+		UserBean userbean = new UserBean();
 		
 		if(userModel != null) {
-			result = true;
+			user.setId(userModel.getId());
 		}
 		
-		return result;
+		return userbean;
 	}
 }

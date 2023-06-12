@@ -28,4 +28,7 @@ public class ClientModel {
 	
 	@Column(name="name")
 	private String name;
+	
+	@Column(name="phone")
+	private String phone;
 }

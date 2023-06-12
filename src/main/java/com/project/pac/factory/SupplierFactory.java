@@ -24,6 +24,8 @@ public class SupplierFactory {
         bean.setId(model.getId());
         bean.setIdUser(model.getIdUser());
         bean.setCnpj(model.getCnpj());
+        bean.setName(model.getName());
+        bean.setPhone(model.getPhone());
 
         return bean;
     }
@@ -34,6 +36,8 @@ public class SupplierFactory {
         model.setId(bean.getId());
         model.setIdUser(bean.getIdUser());
         model.setCnpj(bean.getCnpj());
+        model.setName(bean.getName());
+        model.setPhone(bean.getPhone());
         
         return model;
 	}
