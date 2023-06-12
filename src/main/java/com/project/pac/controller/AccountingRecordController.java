@@ -1,5 +1,6 @@
 package com.project.pac.controller;
 
+import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,5 +46,10 @@ public class AccountingRecordController {
 	@DeleteMapping
 	public void deleteByIdsIn(List<Long> accountingIds) throws Exception {
 		accountingRecordService.deleteByIds(accountingIds);
+	}
+	
+	@GetMapping
+	public List<AccountingRecordBean> findByEmissionDate(@RequestParam Long userId, @RequestParam Calendar initialDate, @RequestParam Calendar finalDate){
+		return accountingRecordService.findByEmissionDateFilter(userId, initialDate, finalDate);
 	}
 }

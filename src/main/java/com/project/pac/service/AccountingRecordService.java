@@ -1,13 +1,16 @@
 package com.project.pac.service;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.project.pac.bean.AccountingRecordBean;
+import com.project.pac.bean.DashboardBean;
 import com.project.pac.factory.AccountingRecordFactory;
+import com.project.pac.model.AccountingRecordModel;
 import com.project.pac.repository.AccountingRecordRepository;
 
 @Service
@@ -52,5 +55,31 @@ public class AccountingRecordService {
 	
 	public void deleteByIds(List<Long> clientIds) throws Exception {
 		accountingRecordRepository.deleteAllById(clientIds);
+	}
+
+	public List<AccountingRecordBean> findByEmissionDateFilter(Long userId, Calendar initialDate, Calendar finalDate) {
+		List<AccountingRecordModel> result = accountingRecordRepository.findByEmissionDate(userId, initialDate, finalDate);
+
+		return new AccountingRecordFactory().buildBeanList(result);
+	}
+	
+	public DashboardBean findDashboardInfo(Long userId, Calendar paymentDate) {
+		DashboardBean dashboard = new DashboardBean();
+		List<AccountingRecordModel> result = accountingRecordRepository.findByPaymentDate(userId, paymentDate);
+		Float finalBalance = 0.00f;
+		
+		for(AccountingRecordModel accountingRecord : result) {
+			if(accountingRecord.getType()) {
+				finalBalance += accountingRecord.getValue();
+				dashboard.setReceivedValue(dashboard.getReceivedValue() + accountingRecord.getValue());
+			}else {
+				finalBalance -= accountingRecord.getValue();
+				dashboard.setPaidValue(dashboard.getPaidValue() + accountingRecord.getValue());
+			}
+		}
+		
+		dashboard.setFinalBalance(finalBalance);
+		
+		return dashboard;
 	}
 }

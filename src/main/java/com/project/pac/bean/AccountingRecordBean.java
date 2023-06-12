@@ -20,5 +20,5 @@ public class AccountingRecordBean {
 	private Calendar maturityDate;
 	private String observation;
 	private Float value;
-	private boolean type;
+	private Boolean type;
 }
