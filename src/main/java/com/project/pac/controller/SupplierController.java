@@ -21,8 +21,8 @@ public class SupplierController {
 	SupplierService supplierService;
 	
 	@GetMapping(path="/findAll")
-	public List<SupplierBean> findAll(){
-		return supplierService.findAll();
+	public List<SupplierBean> findAll(@RequestParam("userId") Long userId){
+		return supplierService.findAll(userId);
 	}
 	
 	@GetMapping(path="/find")
