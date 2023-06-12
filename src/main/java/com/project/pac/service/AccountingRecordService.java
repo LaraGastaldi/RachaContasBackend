@@ -19,8 +19,8 @@ public class AccountingRecordService {
 	@Autowired
 	AccountingRecordRepository accountingRecordRepository;
 	
-	public List<AccountingRecordBean> findAll(){
-		return new AccountingRecordFactory().buildBeanList(accountingRecordRepository.findAll());
+	public List<AccountingRecordBean> findAll(Long userId){
+		return new AccountingRecordFactory().buildBeanList(accountingRecordRepository.findAllByIdUser(userId));
 	}
 	
 	public AccountingRecordBean findById(Long id){

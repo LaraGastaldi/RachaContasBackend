@@ -23,8 +23,8 @@ public class ClientController {
 	ClientService clientService;
 	
 	@GetMapping(path="/findAll")
-	public List<ClientBean> findAll(){
-		return clientService.findAll();
+	public List<ClientBean> findAll(@RequestParam("userId") Long userId){
+		return clientService.findAll(userId);
 	}
 	
 	@PostMapping

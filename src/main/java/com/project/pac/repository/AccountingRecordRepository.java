@@ -19,4 +19,6 @@ public interface AccountingRecordRepository extends JpaRepository<AccountingReco
 			+ "WHERE a.idUser = :userId "
 			+ "AND a.paymentDate >= :paymentDate")
 	public List<AccountingRecordModel> findByPaymentDate(Long userId, Calendar paymentDate);
+
+	public List<AccountingRecordModel> findAllByIdUser(Long userId);
 }
