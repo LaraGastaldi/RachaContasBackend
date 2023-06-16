@@ -11,7 +11,7 @@ import com.project.pac.model.AccountingRecordModel;
 public interface AccountingRecordRepository extends JpaRepository<AccountingRecordModel, Long>{
 
 	@Query("SELECT a FROM AccountingRecordModel a "
-			+ "WHERE a.idUser = :userid "
+			+ "WHERE a.idUser = :userId "
 			+ "AND a.emissionDate BETWEEN :initialDate AND :finalDate")
 	public List<AccountingRecordModel> findByEmissionDate(Long userId, Calendar initialDate, Calendar finalDate);
 
