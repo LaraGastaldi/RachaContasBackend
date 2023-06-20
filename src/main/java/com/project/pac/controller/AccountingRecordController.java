@@ -24,8 +24,8 @@ public class AccountingRecordController {
 	AccountingRecordService accountingRecordService;
 	
 	@GetMapping(path="/findAll")
-	public List<AccountingRecordBean> findAll(@RequestParam("userId") Long userId){
-		return accountingRecordService.findAll(userId);
+	public List<AccountingRecordBean> findAll(){
+		return accountingRecordService.findAll();
 	}
 	
 	@GetMapping(path="/find")
