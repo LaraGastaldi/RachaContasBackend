@@ -24,8 +24,8 @@ public class BankController {
 	BankService bankService;
 	
 	@GetMapping(path="/findAll")
-	public List<BankBean> findAll(){
-		return bankService.findAll();
+	public List<BankBean> findAll(@RequestParam("userId") Long userId){
+		return bankService.findAll(userId);
 	}
 	
 	@GetMapping(path="/find")

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.pac.bean.CategoryBean;
@@ -22,8 +23,8 @@ public class CategoryController {
 	CategoryService categoryService;
 	
 	@GetMapping(path="/findAll")
-	public List<CategoryBean> findAll(){
-		return categoryService.findAll();
+	public List<CategoryBean> findAll(@RequestParam("userId") Long userId){
+		return categoryService.findAll(userId);
 	}
 	
 	@PostMapping

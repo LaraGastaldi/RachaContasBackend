@@ -6,6 +6,7 @@ import lombok.Data;
 public class CategoryBean {
 	
 	private Long id;
+	private Long idUser;
 	private String description;
 	private String name;
 }

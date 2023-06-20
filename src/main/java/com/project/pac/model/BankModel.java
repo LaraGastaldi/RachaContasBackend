@@ -19,6 +19,9 @@ public class BankModel {
 	@Column(name="id_bank")
 	private Long id;
 	
+	@Column(name="id_user")
+	private Long idUser;
+	
 	@Column(name="bank_code")
 	private Long bankCode;
 	

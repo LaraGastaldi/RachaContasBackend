@@ -18,6 +18,9 @@ public class CategoryModel {
 	@Column(name="id_category")
 	private Long id;
 	
+	@Column(name="id_user")
+	private Long idUser;
+	
 	@Column(name="description")
 	private String description;
 	

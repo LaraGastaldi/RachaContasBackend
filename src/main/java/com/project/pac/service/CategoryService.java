@@ -16,8 +16,8 @@ public class CategoryService {
 	@Autowired
 	CategoryRepository categoryRepository;
 	
-	public List<CategoryBean> findAll() {
-		return new CategoryFactory().buildBeanList(categoryRepository.findAll());
+	public List<CategoryBean> findAll(Long userId) {
+		return new CategoryFactory().buildBeanList(categoryRepository.findAllByIdUser(userId));
 	}
 	
 	public List<CategoryBean> saveAll(List<CategoryBean> categoryList){
