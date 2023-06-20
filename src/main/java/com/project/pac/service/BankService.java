@@ -38,4 +38,8 @@ public class BankService {
 		BankBean entity = new BankFactory().buildBean(bankRepository.save(new BankFactory().buildModel(bean))); 
 		return entity;
 	}
+
+	public void deleteByIds(List<Long> bankIds) {
+		bankRepository.deleteAllById(bankIds);
+	}
 }

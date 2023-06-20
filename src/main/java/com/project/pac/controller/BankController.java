@@ -3,6 +3,7 @@ package com.project.pac.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -34,5 +35,10 @@ public class BankController {
 	@PostMapping
 	public List<BankBean> saveAll(@RequestBody List<BankBean> bankList){
 		return bankService.saveAll(bankList);
+	}
+	
+	@DeleteMapping
+	public void delete(@RequestParam("ids") List<Long> bankIds) throws Exception {
+		bankService.deleteByIds(bankIds);
 	}
 }
