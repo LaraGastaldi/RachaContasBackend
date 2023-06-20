@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.project.pac.bean.ClientBean;
 import com.project.pac.bean.SupplierBean;
 import com.project.pac.factory.SupplierFactory;
 import com.project.pac.repository.SupplierRepository;
@@ -37,5 +38,16 @@ public class SupplierService {
 	public SupplierBean save(SupplierBean bean) {
 		SupplierBean entity = new SupplierFactory().buildBean(supplierRepository.save(new SupplierFactory().buildModel(bean))); 
 		return entity;
+	}
+
+	public SupplierBean update(SupplierBean supplier) throws Exception {
+		SupplierBean savedBean = new SupplierBean();
+		if(!supplierRepository.findById(supplier.getId()).isEmpty()) {
+			savedBean = this.save(supplier);
+		}else {
+			throw new Exception("Supplier not found");
+		}
+		
+		return savedBean;
 	}
 }
