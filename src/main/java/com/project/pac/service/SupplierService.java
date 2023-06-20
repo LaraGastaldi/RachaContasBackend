@@ -17,8 +17,8 @@ public class SupplierService {
 	@Autowired
 	SupplierRepository supplierRepository;
 	
-	public List<SupplierBean> findAll(Long userId){
-		return new SupplierFactory().buildBeanList(supplierRepository.findAllByIdUser(userId));
+	public List<SupplierBean> findAll(){
+		return new SupplierFactory().buildBeanList(supplierRepository.findAll());
 	}
 	
 	public SupplierBean findById(Long id){
