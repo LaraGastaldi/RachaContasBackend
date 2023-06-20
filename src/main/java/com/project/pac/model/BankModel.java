@@ -27,4 +27,7 @@ public class BankModel {
 	
 	@Column(name="bank_name")
 	private String bankName;
+	
+	@Column(name="balance")
+	private Float balance;
 }

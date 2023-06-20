@@ -9,7 +9,7 @@ public class SupplierBean {
 
 	private Long id;
 	private Long idUser;
-	private Long cnpj;
+	private String cnpj;
 	private String name;
 	private String phone;
 }

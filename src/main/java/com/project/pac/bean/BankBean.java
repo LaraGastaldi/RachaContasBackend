@@ -11,5 +11,6 @@ public class BankBean {
 	private Long idUser;
 	private Long bankCode;
 	private String bankName;
+	private Float balance;
 	
 }

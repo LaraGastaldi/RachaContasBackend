@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 @NoArgsConstructor
-@Table(name="user", schema = "public")
+@Table(name="users", schema = "public")
 public class UserModel {
 
 	@Id
@@ -27,6 +27,6 @@ public class UserModel {
 	private String password;
 	
 	@Column(name="cnpj")
-	private Long cnpj;
+	private String cnpj;
 	
 }
