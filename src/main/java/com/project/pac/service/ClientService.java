@@ -16,8 +16,8 @@ public class ClientService {
 	@Autowired
 	ClientRepository clientRepository;
 	
-	public List<ClientBean> findAll() {
-		return new ClientFactory().buildBeanList(clientRepository.findAll());
+	public List<ClientBean> findAll(Long userId) {
+		return new ClientFactory().buildBeanList(clientRepository.findAllByIdUser(userId));
 	}
 	
 	public List<ClientBean> saveAll(List<ClientBean> categoryList){

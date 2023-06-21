@@ -10,6 +10,6 @@ public class UserBean {
 	private Long id;
 	private String userName;
 	private String password;
-	private Long cnpj;
+	private String cnpj;
 		
 }

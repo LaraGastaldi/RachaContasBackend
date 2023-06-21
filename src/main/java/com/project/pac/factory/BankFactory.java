@@ -22,9 +22,11 @@ public class BankFactory {
 		BankBean bean =  new BankBean();
 
         bean.setId(model.getId());
+        bean.setIdUser(model.getIdUser());
         bean.setBankCode(model.getBankCode());
         bean.setBankName(model.getBankName());
-
+        bean.setBalance(model.getBalance());
+        
         return bean;
     }
 
@@ -32,8 +34,10 @@ public class BankFactory {
 		BankModel model =  new BankModel();
 
         model.setId(bean.getId());
+        model.setIdUser(bean.getIdUser());
         model.setBankCode(bean.getBankCode());
         model.setBankName(bean.getBankName());
+        model.setBalance(bean.getBalance());
 
         return model;
 	}

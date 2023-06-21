@@ -17,8 +17,8 @@ public class BankService {
 	@Autowired
 	BankRepository bankRepository;
 	
-	public List<BankBean> findAll(){
-		return new BankFactory().buildBeanList(bankRepository.findAll());
+	public List<BankBean> findAll(Long userId){
+		return new BankFactory().buildBeanList(bankRepository.findAllByIdUser(userId));
 	}
 	
 	public BankBean findById(Long id){

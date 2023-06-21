@@ -24,7 +24,7 @@ public class ClientModel {
 	private Long idUser;
 	
 	@Column(name="cnpj")
-	private Long cnpj;
+	private String cnpj;
 	
 	@Column(name="name")
 	private String name;
