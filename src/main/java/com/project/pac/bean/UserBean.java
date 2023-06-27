@@ -11,5 +11,6 @@ public class UserBean {
 	private String userName;
 	private String password;
 	private String cnpj;
+	private Boolean auth;
 		
 }

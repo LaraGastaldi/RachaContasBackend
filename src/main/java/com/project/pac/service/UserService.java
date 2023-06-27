@@ -26,13 +26,15 @@ public class UserService {
 	
 	public UserBean login(UserBean user) {
 		UserModel userModel = userRepository.findByUserNameAndPassword(user.getUserName(), user.getPassword());
-		UserBean userbean = new UserBean();
 		
 		if(userModel != null) {
 			user.setId(userModel.getId());
+			user.setAuth(true);
+		}else {
+			user.setAuth(false);
 		}
 		
-		return userbean;
+		return user;
 	}
 	
 	public UserBean save(UserBean user) throws Exception {
