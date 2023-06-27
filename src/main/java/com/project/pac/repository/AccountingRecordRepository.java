@@ -22,4 +22,9 @@ public interface AccountingRecordRepository extends JpaRepository<AccountingReco
 	public List<AccountingRecordModel> findByPaymentDate(Long userId, LocalDate paymentDate);
 
 	public List<AccountingRecordModel> findAllByIdUser(Long userId);
+
+	@Query("SELECT a FROM AccountingRecordModel a "
+			+ "WHERE a.idUser = :userId "
+			+ "AND EXTRACT(MONTH FROM a.emissionDate) = EXTRACT(MONTH FROM CAST(:emissionDate AS java.sql.Date))")
+	public List<AccountingRecordModel> findByEmissionDate(Long userId, LocalDate emissionDate);
 }

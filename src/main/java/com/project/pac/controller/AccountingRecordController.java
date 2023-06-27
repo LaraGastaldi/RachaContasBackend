@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.pac.bean.AccountingRecordBean;
+import com.project.pac.bean.ChartValuesBean;
 import com.project.pac.bean.DashboardBean;
 import com.project.pac.service.AccountingRecordService;
 
@@ -58,5 +59,10 @@ public class AccountingRecordController {
 	@GetMapping("/findDashboard")
 	public DashboardBean findDashboardInfo(@RequestParam Long userId, @RequestParam String paymentDate) throws ParseException {
 		return accountingRecordService.findDashboardInfo(userId, paymentDate);
+	}
+	
+	@GetMapping("/findChartValues")
+	public List<ChartValuesBean> findChartValues(@RequestParam Long userId, @RequestParam String year) throws ParseException {
+		return accountingRecordService.findChartValues(userId, year);
 	}
 }

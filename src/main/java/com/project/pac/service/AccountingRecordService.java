@@ -2,6 +2,7 @@ package com.project.pac.service;
 
 import java.text.ParseException;
 import java.time.LocalDate;
+import java.time.Month;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.project.pac.bean.AccountingRecordBean;
+import com.project.pac.bean.ChartValuesBean;
 import com.project.pac.bean.DashboardBean;
 import com.project.pac.factory.AccountingRecordFactory;
 import com.project.pac.model.AccountingRecordModel;
@@ -74,8 +76,9 @@ public class AccountingRecordService {
 	public DashboardBean findDashboardInfo(Long userId, String date) throws ParseException {
 		DashboardBean dashboard = new DashboardBean();
 		LocalDate paymentDate = this.convertDate(date);
-		List<AccountingRecordModel> result = accountingRecordRepository.findByPaymentDate(userId, paymentDate);
 		Float finalBalance = 0.00f;
+		
+		List<AccountingRecordModel> result = accountingRecordRepository.findByPaymentDate(userId, paymentDate);
 		
 		for(AccountingRecordModel accountingRecord : result) {
 			if(accountingRecord.getType()) {
@@ -92,6 +95,40 @@ public class AccountingRecordService {
 		return dashboard;
 	}
 	
+	public List<ChartValuesBean> findChartValues(Long userId, String year) throws ParseException{
+		List<ChartValuesBean> chartList = new ArrayList<>();
+		
+		LocalDate startDate = LocalDate.of(Integer.parseInt(year), Month.JANUARY, 1);
+        LocalDate endDate = LocalDate.of(Integer.parseInt(year), Month.DECEMBER, 31);
+
+        LocalDate currentDate = startDate;
+        while (!currentDate.isAfter(endDate)) {
+        	Float finalBalance = 0.00f;
+            List<AccountingRecordModel> result = accountingRecordRepository.findByEmissionDate(userId, currentDate);
+			
+			for(AccountingRecordModel accountingRecord : result) {
+				if(accountingRecord.getType()) {
+					finalBalance += accountingRecord.getValue();
+				}else {
+					finalBalance -= accountingRecord.getValue();
+				}
+			}
+			
+			ChartValuesBean chartBean = new ChartValuesBean(this.formatDate(currentDate), finalBalance);
+			chartList.add(chartBean);
+			
+			currentDate = currentDate.plusMonths(1);
+        }
+
+		return chartList;
+	}
+	
+	private String formatDate(LocalDate date) {
+		DateTimeFormatter  formatter = DateTimeFormatter.ofPattern("MM/yyyy");
+        String formattedDate = date.format(formatter);
+		
+		return formattedDate;
+	}
 	private LocalDate convertDate(String dateString) throws ParseException {
 		DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 		LocalDate date =LocalDate.parse(dateString, dateFormat);
