@@ -29,4 +29,15 @@ public class UserFactory {
         return bean;
     }
 
+	public UserModel buildModel(UserBean bean) {
+		UserModel model =  new UserModel();
+
+        model.setId(bean.getId());
+        model.setUserName(bean.getUserName());
+        model.setPassword(bean.getPassword());
+        model.setCnpj(bean.getCnpj());
+
+        return model;
+	}
+
 }

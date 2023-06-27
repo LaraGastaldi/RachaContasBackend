@@ -1,5 +1,8 @@
 package com.project.pac.service;
 
+import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -27,17 +30,22 @@ public class AccountingRecordService {
 		return new AccountingRecordFactory().buildBean(accountingRecordRepository.findById(id).get());
 	}
 	
-	public List<AccountingRecordBean> saveAll(List<AccountingRecordBean> categoryList){
+	public List<AccountingRecordBean> saveAll(List<AccountingRecordBean> categoryList) throws ParseException {
 		List<AccountingRecordBean> savedBeans = new ArrayList<>();
 		
 		categoryList.forEach(bean -> {
-			savedBeans.add(this.save(bean));
+			try {
+				savedBeans.add(this.save(bean));
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
 		});
 		
 		return savedBeans;
 	}
 	
-	public AccountingRecordBean save(AccountingRecordBean bean) {
+	public AccountingRecordBean save(AccountingRecordBean bean) throws ParseException {
+		bean = new AccountingRecordFactory().buildBeanDates(bean);
 		AccountingRecordBean entity = new AccountingRecordFactory().buildBean(accountingRecordRepository.save(new AccountingRecordFactory().buildModel(bean))); 
 		return entity;
 	}
@@ -63,8 +71,9 @@ public class AccountingRecordService {
 		return new AccountingRecordFactory().buildBeanList(result);
 	}
 	
-	public DashboardBean findDashboardInfo(Long userId, Calendar paymentDate) {
+	public DashboardBean findDashboardInfo(Long userId, String date) throws ParseException {
 		DashboardBean dashboard = new DashboardBean();
+		LocalDate paymentDate = this.convertDate(date);
 		List<AccountingRecordModel> result = accountingRecordRepository.findByPaymentDate(userId, paymentDate);
 		Float finalBalance = 0.00f;
 		
@@ -81,5 +90,12 @@ public class AccountingRecordService {
 		dashboard.setFinalBalance(finalBalance);
 		
 		return dashboard;
+	}
+	
+	private LocalDate convertDate(String dateString) throws ParseException {
+		DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+		LocalDate date =LocalDate.parse(dateString, dateFormat);
+		
+		return date;
 	}
 }

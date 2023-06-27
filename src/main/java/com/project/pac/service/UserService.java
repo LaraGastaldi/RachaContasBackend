@@ -34,4 +34,17 @@ public class UserService {
 		
 		return userbean;
 	}
+	
+	public UserBean save(UserBean user) throws Exception {
+		UserModel userModel = userRepository.findByUserName(user.getUserName());
+		UserBean savedUser = new UserBean();
+		
+		if(userModel == null) {
+			savedUser = new UserFactory().buildBean(userRepository.save(new UserFactory().buildModel(user)));
+		}else {
+			throw new Exception("User already exists");
+		}
+		
+		return savedUser;
+	}
 }

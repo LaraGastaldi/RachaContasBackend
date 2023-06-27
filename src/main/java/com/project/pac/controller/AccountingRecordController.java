@@ -1,5 +1,6 @@
 package com.project.pac.controller;
 
+import java.text.ParseException;
 import java.util.Calendar;
 import java.util.List;
 
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.pac.bean.AccountingRecordBean;
+import com.project.pac.bean.DashboardBean;
 import com.project.pac.service.AccountingRecordService;
 
 @RestController
@@ -34,7 +36,7 @@ public class AccountingRecordController {
 	}
 	
 	@PostMapping
-	public List<AccountingRecordBean> saveAll(@RequestBody List<AccountingRecordBean> accountingRecordList){
+	public List<AccountingRecordBean> saveAll(@RequestBody List<AccountingRecordBean> accountingRecordList) throws ParseException{
 		return accountingRecordService.saveAll(accountingRecordList);
 	}
 	
@@ -51,5 +53,10 @@ public class AccountingRecordController {
 	@GetMapping
 	public List<AccountingRecordBean> findByEmissionDate(@RequestParam Long userId, @RequestParam Calendar initialDate, @RequestParam Calendar finalDate){
 		return accountingRecordService.findByEmissionDateFilter(userId, initialDate, finalDate);
+	}
+	
+	@GetMapping("/findDashboard")
+	public DashboardBean findDashboardInfo(@RequestParam Long userId, @RequestParam String paymentDate) throws ParseException {
+		return accountingRecordService.findDashboardInfo(userId, paymentDate);
 	}
 }

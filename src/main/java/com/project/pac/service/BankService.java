@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.project.pac.bean.BankBean;
-import com.project.pac.bean.CategoryBean;
 import com.project.pac.factory.BankFactory;
 import com.project.pac.repository.BankRepository;
 

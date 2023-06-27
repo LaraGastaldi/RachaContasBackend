@@ -1,5 +1,6 @@
 package com.project.pac.repository;
 
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.List;
 
@@ -18,7 +19,7 @@ public interface AccountingRecordRepository extends JpaRepository<AccountingReco
 	@Query("SELECT a FROM AccountingRecordModel a "
 			+ "WHERE a.idUser = :userId "
 			+ "AND a.paymentDate >= :paymentDate")
-	public List<AccountingRecordModel> findByPaymentDate(Long userId, Calendar paymentDate);
+	public List<AccountingRecordModel> findByPaymentDate(Long userId, LocalDate paymentDate);
 
 	public List<AccountingRecordModel> findAllByIdUser(Long userId);
 }

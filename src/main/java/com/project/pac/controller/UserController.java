@@ -34,4 +34,9 @@ public class UserController {
 	public UserBean login(@RequestBody UserBean user) {
 		return userService.login(user);
 	}
+	
+	@PostMapping()
+	public UserBean save(@RequestBody UserBean user) throws Exception {
+		return userService.save(user);
+	}
 }

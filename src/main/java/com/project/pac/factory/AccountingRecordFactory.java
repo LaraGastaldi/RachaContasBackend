@@ -1,5 +1,8 @@
 package com.project.pac.factory;
 
+import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,5 +57,31 @@ public class AccountingRecordFactory {
         model.setType(bean.getType());
         
         return model;
+	}
+
+	public AccountingRecordBean buildBeanDates(AccountingRecordBean bean) throws ParseException {
+		AccountingRecordBean newBean =  new AccountingRecordBean();
+
+		newBean.setId(bean.getId());
+		newBean.setIdSupplier(bean.getIdSupplier());
+		newBean.setIdCategory(bean.getIdCategory());
+		newBean.setIdBank(bean.getIdBank());
+		newBean.setIdCliente(bean.getIdCliente());
+		newBean.setIdUser(bean.getIdUser());
+		newBean.setEmissionDate(this.convertDate(bean.getEmissionDateString()));
+		newBean.setPaymentDate(this.convertDate(bean.getPaymentDateString()));
+		newBean.setMaturityDate(this.convertDate(bean.getMaturityDateString()));
+		newBean.setObservation(bean.getObservation());
+		newBean.setValue(bean.getValue());
+		newBean.setType(bean.getType());
+
+        return newBean;
+	}
+	
+	private LocalDate convertDate(String dateString) throws ParseException {
+		DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+		LocalDate date =LocalDate.parse(dateString, dateFormat);
+		
+		return date;
 	}
 }

@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.pac.bean.BankBean;
-import com.project.pac.bean.CategoryBean;
 import com.project.pac.service.BankService;
 
 @RestController

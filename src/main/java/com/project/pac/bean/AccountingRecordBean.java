@@ -1,6 +1,6 @@
 package com.project.pac.bean;
 
-import java.util.Calendar;
+import java.time.LocalDate;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,9 +15,12 @@ public class AccountingRecordBean {
 	private Long idBank;
 	private Long idCliente;
 	private Long idUser;
-	private Calendar emissionDate;
-	private Calendar paymentDate;
-	private Calendar maturityDate;
+	private LocalDate emissionDate;
+	private String emissionDateString;
+	private LocalDate paymentDate;
+	private String paymentDateString;
+	private LocalDate maturityDate;
+	private String maturityDateString;
 	private String observation;
 	private Float value;
 	private Boolean type;

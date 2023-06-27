@@ -1,6 +1,6 @@
 package com.project.pac.model;
 
-import java.util.Calendar;
+import java.time.LocalDate;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -38,13 +38,13 @@ public class AccountingRecordModel {
 	private Long idUser;
 	
 	@Column(name="emission_date")
-	private Calendar emissionDate;
+	private LocalDate emissionDate;
 	
 	@Column(name="payment_date")
-	private Calendar paymentDate;
+	private LocalDate paymentDate;
 	
 	@Column(name="maturity_date")
-	private Calendar maturityDate;
+	private LocalDate maturityDate;
 	
 	@Column(name="observation")
 	private String observation;
