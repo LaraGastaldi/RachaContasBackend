@@ -29,4 +29,6 @@ public interface AccountingRecordRepository extends JpaRepository<AccountingReco
 	public List<AccountingRecordModel> findByEmissionDate(Long userId, LocalDate emissionDate);
 	
 	public List<AccountingRecordModel> findAllByIdUserAndType(Long userId, Boolean type);
+
+	public void deleteAllByIdIn(List<Long> ids);
 }

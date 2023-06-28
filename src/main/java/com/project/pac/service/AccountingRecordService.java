@@ -63,8 +63,8 @@ public class AccountingRecordService {
 		return savedBean;
 	}
 	
-	public void deleteByIds(List<Long> clientIds) throws Exception {
-		accountingRecordRepository.deleteAllById(clientIds);
+	public void deleteByIds(List<Long> ids) throws Exception {
+		accountingRecordRepository.deleteAllById(ids);
 	}
 
 	public List<AccountingRecordBean> findByEmissionDateFilter(Long userId, Calendar initialDate, Calendar finalDate) {

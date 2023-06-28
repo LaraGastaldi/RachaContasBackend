@@ -47,7 +47,7 @@ public class AccountingRecordController {
 	}
 	
 	@DeleteMapping
-	public void deleteByIdsIn(List<Long> accountingIds) throws Exception {
+	public void deleteByIdsIn(@RequestParam("ids") List<Long> accountingIds) throws Exception {
 		accountingRecordService.deleteByIds(accountingIds);
 	}
 	
