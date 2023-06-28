@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.project.pac.bean.ChangePasswordBean;
 import com.project.pac.bean.UserBean;
 import com.project.pac.service.UserService;
 
@@ -38,5 +39,10 @@ public class UserController {
 	@PostMapping()
 	public UserBean save(@RequestBody UserBean user) throws Exception {
 		return userService.save(user);
+	}
+	
+	@PostMapping(path="/changePassword")
+	public UserBean changePassword(@RequestBody ChangePasswordBean bean) throws Exception {
+		return userService.changePassword(bean);
 	}
 }

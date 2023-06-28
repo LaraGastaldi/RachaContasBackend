@@ -1,10 +1,12 @@
 package com.project.pac.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.project.pac.bean.ChangePasswordBean;
 import com.project.pac.bean.UserBean;
 import com.project.pac.factory.UserFactory;
 import com.project.pac.model.UserModel;
@@ -45,6 +47,26 @@ public class UserService {
 			savedUser = new UserFactory().buildBean(userRepository.save(new UserFactory().buildModel(user)));
 		}else {
 			throw new Exception("User already exists");
+		}
+		
+		return savedUser;
+	}
+	
+	public UserBean changePassword(ChangePasswordBean bean) throws Exception {
+		Optional<UserModel> userModel = userRepository.findById(bean.getUserId());
+		UserBean savedUser = new UserBean();
+		
+		if(userModel.get() != null) {
+			if(userModel.get().getPassword().equals(bean.getPassword())) {
+				UserModel userToSave = userModel.get();
+				userToSave.setPassword(bean.getNewPassword());
+				
+				savedUser = new UserFactory().buildBean(userRepository.save(userToSave));
+			}else {
+				throw new Exception("Incorrect password");
+			}
+		}else {
+			throw new Exception("User doesnt exist");
 		}
 		
 		return savedUser;
