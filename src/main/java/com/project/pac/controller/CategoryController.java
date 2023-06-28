@@ -38,7 +38,7 @@ public class CategoryController {
 	}
 	
 	@DeleteMapping
-	public void deleteByIdsIn(@RequestBody List<Long> cateogoryIds) throws Exception {
+	public void deleteByIdsIn(@RequestParam("ids") List<Long> cateogoryIds) throws Exception {
 		categoryService.deleteByIds(cateogoryIds);
 	}
 }

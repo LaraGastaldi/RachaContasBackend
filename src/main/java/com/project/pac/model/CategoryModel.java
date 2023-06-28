@@ -1,5 +1,7 @@
 package com.project.pac.model;
 
+import com.project.pac.enums.CategoryType;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -26,4 +28,7 @@ public class CategoryModel {
 	
 	@Column(name="name")
 	private String name;
+	
+	@Column(name="type")
+	private CategoryType type;
 }

@@ -25,6 +25,7 @@ public class CategoryFactory{
 		bean.setIdUser(model.getIdUser());
 		bean.setName(model.getName());
 		bean.setDescription(model.getDescription());
+		bean.setType(model.getType());
 		
 		return bean;
 	}
@@ -36,6 +37,7 @@ public class CategoryFactory{
 		model.setIdUser(bean.getIdUser());
 		model.setName(bean.getName());
 		model.setDescription(bean.getDescription());
+		model.setType(bean.getType());
 		
 		return model;
 	}
