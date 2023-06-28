@@ -56,6 +56,11 @@ public class AccountingRecordController {
 		return accountingRecordService.findByEmissionDateFilter(userId, initialDate, finalDate);
 	}
 	
+	@GetMapping(path="/findByType")
+	public List<AccountingRecordBean> findByType(@RequestParam Long userId, @RequestParam Boolean type){
+		return accountingRecordService.findAllByType(userId, type);
+	}
+	
 	@GetMapping("/findDashboard")
 	public DashboardBean findDashboardInfo(@RequestParam Long userId, @RequestParam String paymentDate) throws ParseException {
 		return accountingRecordService.findDashboardInfo(userId, paymentDate);

@@ -27,4 +27,6 @@ public interface AccountingRecordRepository extends JpaRepository<AccountingReco
 			+ "WHERE a.idUser = :userId "
 			+ "AND EXTRACT(MONTH FROM a.emissionDate) = EXTRACT(MONTH FROM CAST(:emissionDate AS java.sql.Date))")
 	public List<AccountingRecordModel> findByEmissionDate(Long userId, LocalDate emissionDate);
+	
+	public List<AccountingRecordModel> findAllByIdUserAndType(Long userId, Boolean type);
 }

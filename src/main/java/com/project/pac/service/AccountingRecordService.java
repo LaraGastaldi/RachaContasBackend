@@ -73,6 +73,12 @@ public class AccountingRecordService {
 		return new AccountingRecordFactory().buildBeanList(result);
 	}
 	
+	public List<AccountingRecordBean> findAllByType(Long userId, Boolean type) {
+		List<AccountingRecordModel> result = accountingRecordRepository.findAllByIdUserAndType(userId, type);
+
+		return new AccountingRecordFactory().buildBeanList(result);
+	}
+	
 	public DashboardBean findDashboardInfo(Long userId, String date) throws ParseException {
 		DashboardBean dashboard = new DashboardBean();
 		LocalDate paymentDate = this.convertDate(date);
