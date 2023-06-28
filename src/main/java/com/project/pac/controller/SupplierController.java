@@ -3,6 +3,7 @@ package com.project.pac.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -40,5 +41,10 @@ public class SupplierController {
 	@PostMapping
 	public List<SupplierBean> saveAll(@RequestBody List<SupplierBean> accountingRecordList){
 		return supplierService.saveAll(accountingRecordList);
+	}
+	
+	@DeleteMapping
+	public void delete(@RequestParam("ids") List<Long> supplierIds) throws Exception {
+		supplierService.deleteByIds(supplierIds);
 	}
 }

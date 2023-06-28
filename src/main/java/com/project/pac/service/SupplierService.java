@@ -50,4 +50,8 @@ public class SupplierService {
 		
 		return savedBean;
 	}
+
+	public void deleteByIds(List<Long> clientIds) {
+		supplierRepository.deleteAllById(clientIds);
+	}
 }
