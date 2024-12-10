@@ -11,13 +11,23 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('debts', function (Blueprint $table) {
+        $driver = Schema::connection($this->getConnection())->getConnection()->getDriverName();
+
+        Schema::create('debts', function (Blueprint $table) use ($driver) {
             $table->id();
-            $table->string('name');
-            $table->text('description');
-            $table->float('total_value', 2);
-            $table->dateTime('debt_date');
-            $table->dateTime('max_pay_date');
+            if ($driver == 'sqlite') {
+                $table->string('name')->default('');
+                $table->text('description')->default('');
+                $table->float('total_value', 2)->default(0);
+                $table->dateTime('debt_date')->default(0);
+                $table->dateTime('max_pay_date')->nullable();
+            } else {
+                $table->string('name');
+                $table->text('description');
+                $table->float('total_value', 2);
+                $table->dateTime('debt_date');
+                $table->dateTime('max_pay_date')->nullable();
+            }
             $table->timestamps();
         });
     }

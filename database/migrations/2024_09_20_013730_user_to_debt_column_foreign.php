@@ -11,12 +11,22 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('user_to_debt', function (Blueprint $table) {
-            $table->bigInteger('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users');
+        $driver = Schema::connection($this->getConnection())->getConnection()->getDriverName();
 
-            $table->bigInteger('debt_id')->unsigned();
-            $table->foreign('debt_id')->references('id')->on('debts');
+        Schema::table('user_to_debt', function (Blueprint $table) use ($driver) {
+            if ($driver == 'sqlite') {
+                $table->bigInteger('user_id')->unsigned()->default(0);
+                $table->foreign('user_id')->references('id')->on('users');
+
+                $table->bigInteger('debt_id')->unsigned()->default(0);
+                $table->foreign('debt_id')->references('id')->on('debts');
+            } else {
+                $table->bigInteger('user_id')->unsigned();
+                $table->foreign('user_id')->references('id')->on('users');
+
+                $table->bigInteger('debt_id')->unsigned();
+                $table->foreign('debt_id')->references('id')->on('debts');
+            }
         });
     }
 

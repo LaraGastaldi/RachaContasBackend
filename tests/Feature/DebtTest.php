@@ -1,6 +1,7 @@
 <?php
 
 namespace Tests\Feature;
+use Bus;
 use Tests\TestCase;
 
 class DebtTest extends TestCase
@@ -13,6 +14,8 @@ class DebtTest extends TestCase
     public function test_debt_creation()
     {
         $this->actingAs($this->user);
+
+        Bus::fake();
 
         $response = $this->post('/debt', [
             'name' => 'test',
@@ -27,8 +30,8 @@ class DebtTest extends TestCase
                     'name' => 'test',
                 ]
             ]
-        ]);
+        ], $this->header);
 
-        $response->assertStatus(200);
+        $response->assertStatus(201);
     }
 }

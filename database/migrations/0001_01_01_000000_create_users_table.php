@@ -11,32 +11,57 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        $driver = Schema::connection($this->getConnection())->getConnection()->getDriverName();
+        Schema::create('users', function (Blueprint $table) use ($driver) {
             $table->id();
-            $table->string('first_name');
-            $table->string('last_name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('phone')->nullable();
-            $table->timestamp('phone_verified_at')->nullable();
-            $table->string('password');
+            if ($driver == 'sqlite') {
+                $table->string('first_name')->default('');
+                $table->string('last_name')->default('');
+                $table->string('email')->default('');
+                $table->timestamp('email_verified_at')->nullable();
+                $table->string('phone')->nullable();
+                $table->timestamp('phone_verified_at')->nullable();
+                $table->string('password')->default('');
+            } else {
+                $table->string('first_name');
+                $table->string('last_name');
+                $table->string('email')->unique();
+                $table->timestamp('email_verified_at')->nullable();
+                $table->string('phone')->nullable();
+                $table->timestamp('phone_verified_at')->nullable();
+                $table->string('password');
+            }
+
             $table->rememberToken();
             $table->timestamps();
         });
 
-        Schema::create('password_reset_tokens', function (Blueprint $table) {
-            $table->string('email')->primary();
-            $table->string('token');
+        Schema::create('password_reset_tokens', function (Blueprint $table) use ($driver) {
+            if ($driver == 'sqlite') {
+                $table->string('email')->default('');
+                $table->string('token')->default('');
+            } else {
+                $table->string('email');
+                $table->string('token');
+            }
             $table->timestamp('created_at')->nullable();
         });
 
-        Schema::create('sessions', function (Blueprint $table) {
-            $table->string('id')->primary();
+        Schema::create('sessions', function (Blueprint $table) use ($driver) {
+            if ($driver == 'sqlite') {
+                $table->string('id')->default('');
+                $table->string('ip_address')->default('');
+                $table->text('user_agent')->default('');
+                $table->longText('payload')->default('');
+                $table->integer('last_activity')->default(0);
+            } else {
+                $table->string('id')->primary();
+                $table->string('ip_address', 45)->nullable();
+                $table->text('user_agent')->nullable();
+                $table->longText('payload');
+                $table->integer('last_activity')->index();
+            }
             $table->foreignId('user_id')->nullable()->index();
-            $table->string('ip_address', 45)->nullable();
-            $table->text('user_agent')->nullable();
-            $table->longText('payload');
-            $table->integer('last_activity')->index();
         });
     }
 

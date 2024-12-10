@@ -21,8 +21,5 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('user_to_debt', function (Blueprint $table) {
-            $table->bigInteger('user_id')->unsigned()->change();
-        });
     }
 };

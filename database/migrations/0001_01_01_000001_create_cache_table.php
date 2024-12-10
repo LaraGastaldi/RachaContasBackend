@@ -11,16 +11,30 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('cache', function (Blueprint $table) {
-            $table->string('key')->primary();
-            $table->mediumText('value');
-            $table->integer('expiration');
+        $driver = Schema::connection($this->getConnection())->getConnection()->getDriverName();
+
+        Schema::create('cache', function (Blueprint $table) use ($driver) {
+            if ($driver == 'sqlite') {
+                $table->string('key')->primary()->default('');
+                $table->mediumText('value')->default('');
+                $table->integer('expiration')->default(0);
+            } else {
+                $table->string('key')->primary();
+                $table->mediumText('value');
+                $table->integer('expiration');
+            }
         });
 
-        Schema::create('cache_locks', function (Blueprint $table) {
-            $table->string('key')->primary();
-            $table->string('owner');
-            $table->integer('expiration');
+        Schema::create('cache_locks', function (Blueprint $table) use ($driver) {
+            if ($driver == 'sqlite') {
+                $table->string('key')->primary()->default('');
+                $table->string('owner')->default('');
+                $table->integer('expiration')->default(0);
+            } else {
+                $table->string('key')->primary();
+                $table->string('owner');
+                $table->integer('expiration');
+            }
         });
     }
 

@@ -11,8 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('debts', function (Blueprint $table) {
-            $table->bigInteger('user_id')->unsigned();
+        $driver = Schema::connection($this->getConnection())->getConnection()->getDriverName();
+
+        Schema::table('debts', function (Blueprint $table) use ($driver) {
+            if ($driver == 'sqlite') {
+                $table->bigInteger('user_id')->unsigned()->default(0);
+            } else {
+                $table->bigInteger('user_id')->unsigned();
+            }
             $table->foreign('user_id')->references('id')->on('users');
         });
     }

@@ -11,10 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('debts', function (Blueprint $table) {
+        $driver = Schema::connection($this->getConnection())->getConnection()->getDriverName();
+
+        Schema::table('debts', function (Blueprint $table) use ($driver) {
             $table->text('description')->nullable()->change();
-            $table->timestampTz('max_pay_date')->nullable()->change();
-            $table->timestampTz('debt_date')->change();
+
+            if ($driver == 'sqlite') {
+                $table->timestampTz('debt_date')->default(0)->change();
+            } else {
+                $table->timestampTz('debt_date')->change();
+            }
         });
     }
 
@@ -23,10 +29,5 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('debts', function (Blueprint $table) {
-            $table->text('description')->change();
-            $table->timestamp('max_pay_date')->change();
-            $table->timestamp('debt_date')->change();
-        });
     }
 };

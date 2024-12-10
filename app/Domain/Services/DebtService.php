@@ -42,6 +42,9 @@ class DebtService extends BaseService
             if (!array_key_exists('email', $user)) {
                 $user['email'] = null;
             }
+            if (!array_key_exists('value', $user)) {
+                $user['value'] = null;
+            }
             $user['created_at'] = $debt->created_at;
             $user['updated_at'] = $debt->updated_at;
             return $user;

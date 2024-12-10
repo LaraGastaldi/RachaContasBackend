@@ -11,17 +11,31 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user_to_debt', function (Blueprint $table) {
+        $driver = Schema::connection($this->getConnection())->getConnection()->getDriverName();
+
+        Schema::create('user_to_debt', function (Blueprint $table) use ($driver) {
             $table->id();
             $table->timestamps();
 
-            $table->string('relationship');
-            $table->string('phone')->nullable();
-            $table->string('email')->nullable();
-            $table->timestamp('email_sent_at')->nullable();
-            $table->timestamp('sms_sent_at')->nullable();
-            $table->timestamp('verified_at')->nullable();
-            $table->float('value', 2);
+            if ($driver == 'sqlite') {
+                $table->string('name')->default('');
+                $table->string('relationship')->default('');
+                $table->string('phone')->nullable();
+                $table->string('email')->default('');
+                $table->timestamp('email_sent_at')->default(0);
+                $table->timestamp('sms_sent_at')->default(0);
+                $table->timestamp('verified_at')->default(0);
+                $table->float('value', 2)->nullable();
+            } else {
+                $table->string('name');
+                $table->string('relationship');
+                $table->string('phone')->nullable();
+                $table->string('email')->nullable();
+                $table->timestamp('email_sent_at')->nullable();
+                $table->timestamp('sms_sent_at')->nullable();
+                $table->timestamp('verified_at')->nullable();
+                $table->float('value', 2)->nullable();
+            }
         });
     }
 
