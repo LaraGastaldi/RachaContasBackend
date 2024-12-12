@@ -4,22 +4,22 @@ namespace App\Domain\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
 
-class RequiredIfArrayBigger implements Rule
+class RequiredValue implements Rule
 {
     protected $array;
-    protected $size;
+    protected $relationship;
 
     /**
      * Create a new rule instance.
      *
      * @param  array  $array
-     * @param  int  $size
+     * @param  string  $relationship
      * @return void
      */
-    public function __construct(array $array, $size)
+    public function __construct(array $array, $relationship)
     {
         $this->array = $array;
-        $this->size = $size;
+        $this->relationship = $relationship;
     }
 
     /**
@@ -31,7 +31,7 @@ class RequiredIfArrayBigger implements Rule
      */
     public function passes($attribute, $value)
     {
-        if (count($this->array) > $this->size && empty($value)) {
+        if (count($this->array) > 1 && $this->relationship == 'payer' && empty($value)) {
             return false;
         }
 

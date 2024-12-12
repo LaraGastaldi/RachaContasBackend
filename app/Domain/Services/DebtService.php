@@ -35,6 +35,8 @@ class DebtService extends BaseService
             $user['debt_id'] = $debt->id;
             if ($user['relationship'] != UserToDebtRelationship::RECEIVER) {
                 $user['verify_code'] = bin2hex(random_bytes(4));
+            } else {
+                $user['verify_code'] = null;
             }
             if (!array_key_exists('phone', $user)) {
                 $user['phone'] = null;
