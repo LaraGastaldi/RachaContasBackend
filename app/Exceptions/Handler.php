@@ -7,6 +7,7 @@ use Illuminate\Database\UniqueConstraintViolationException;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\ErrorHandler\Exception\FlattenException;
 use Symfony\Component\Routing\Exception\MethodNotAllowedException;
+use Tymon\JWTAuth\Exceptions\JWTException;
 
 class Handler extends \Illuminate\Foundation\Exceptions\Handler
 {
@@ -14,6 +15,13 @@ class Handler extends \Illuminate\Foundation\Exceptions\Handler
     {
         if ($e instanceof ValidationException) {
             return response()->json($e->validator->errors(), 422);
+        }
+
+        if ($e instanceof JWTException) {
+            return response()->json([
+                'message' => 'Unauthorized',
+                'status' => 401
+            ], 401);
         }
 
         if ($e instanceof \Illuminate\Http\Exceptions\ThrottleRequestsException) {
