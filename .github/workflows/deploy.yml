@@ -22,4 +22,4 @@ jobs:
           remote: /var/www/sites/rachacontas  # Target directory on the server
           host: 18.191.211.138
           username: ubuntu
-          private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+          private-key: ${{ secrets.DEPLOY_PRIVATE_KEY }}
