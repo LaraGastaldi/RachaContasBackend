@@ -1,33 +1,25 @@
-name: Deploy Files
+name: Deploy via SFTP
 
 on:
   push:
     branches:
-      - master
-  # Enables manually triggering of Workflow with file synchronization option
-  workflow_dispatch:
-    inputs:
-      sync:
-        description: "File synchronization"
-        required: true
-        default: "delta"
+      - main  # Trigger deployment on pushes to the main branch
 
 jobs:
-  deploy-master:
-    name: "master branch"
-    if: ${{ github.ref == 'refs/heads/master' }}
+  deploy:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+
     steps:
-      - name: "Checkout"
-        uses: actions/checkout@v4
+      # Step 1: Checkout the code
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Step 2: Deploy via SFTP with Private Key
+      - name: Deploy via SFTP
+        uses: garygrossgarten/github-action-scp@v1.1.0
         with:
-          fetch-depth: 0
-      - name: "Deploy"
-        uses: milanmk/actions-file-deployer@master
-        with:
-          remote-protocol: "sftp"
-          remote-host: "18.191.211.138"
-          remote-user: "ubuntu"
-          ssh-private-key: ${{ secrets.DEPLOY_PRIVATE_KEY }}
-          remote-path: "/var/www/sites/rachacontas"
+          local: ./  # Directory to upload (root of the repo)
+          remote: /var/www/sites/rachacontas  # Target directory on the server
+          host: 18.191.211.138
+          username: ubuntu
+          private-key: ${{ secrets.SSH_PRIVATE_KEY }}
