@@ -40,4 +40,4 @@ Para funcionar, é necessário rodar as migrações como abaixo:
 ```
 docker-compose run workspace php artisan migrate
 ```
-Ou entrar dentro do container e rodar `php artisan migrate`
+Ou entrar dentro do container e rodar `php artisan migrate`.
