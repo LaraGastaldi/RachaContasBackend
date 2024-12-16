@@ -34,14 +34,6 @@
                     <hr/>
                 </td>
             <tr>
-            <tr>
-                <td>Ou copie e cole o link abaixo:</td>
-            </tr>
-            <tr>
-                <td>
-                    <a>{{ env('VERIFY_URL') }}/{{ $user['verify_code'] }}</a>
-                </td>
-            </tr>
         </table>
     </body>
 </html>

@@ -36,8 +36,8 @@ class UserDebtController extends BaseController
     }
     public function verify($id): \Illuminate\Http\RedirectResponse
     {
-        $user = UserToDebt::where('id','=', $id)->firstOrFail();
-        $user->verified_at = now()->format('Y-m-d H:i:s');
+        $user = UserToDebt::findOrFail($id);
+        $user->verified_at = now();
         $user->save();
 
         return redirect()->route('user-to-debt.verified');

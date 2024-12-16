@@ -112,4 +112,13 @@ class DebtService extends BaseService
 
         return $this->repository->find($debt->id);
     }
+
+    public function delete(int $id)
+    {
+        $debt = $this->repository->find($id);
+        $debt->users()->delete();
+        $debt->proofs()->delete();
+        $debt->delete();
+        return true;
+    }
 }

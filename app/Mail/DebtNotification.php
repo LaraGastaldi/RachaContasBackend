@@ -59,7 +59,7 @@ class DebtNotification extends Mailable
     {
         return $this->debt->proofs->filter(fn ($proof) => $proof->type == ProofType::RECEIPT)
         ->map(function ($proof, $idx) {
-            $attach = Attachment::fromData(fn () => $proof->src, "comprovante$idx.jpeg")->withMime('image/jpeg');
+            $attach = Attachment::fromData(fn () => base64_decode($proof->src), "comprovante$idx.jpeg")->withMime('image/jpeg');
             return $attach;
         })
         ->toArray();
