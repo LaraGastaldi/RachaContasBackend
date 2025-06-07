@@ -15,8 +15,6 @@ class DebtTest extends TestCase
     {
         $this->actingAs($this->user);
 
-        Bus::fake();
-
         $response = $this->post('/debt', [
             'name' => 'test',
             'description' => 'test description',
@@ -33,5 +31,16 @@ class DebtTest extends TestCase
         ], $this->header);
 
         $response->assertStatus(201);
+    }
+
+    public function test_debt_creation_with_invalid_data()
+    {
+        $this->actingAs($this->user);
+
+        $response = $this->post('/debt', [
+            'name' => '',
+        ], $this->header);
+
+        $response->assertStatus(422);
     }
 }
