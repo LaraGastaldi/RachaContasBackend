@@ -35,7 +35,7 @@ class DebtController extends BaseController
             'users.*.phone' => ['required_if:users.*.email,null', new PhoneRule],
             'users.*.email' => 'required_if:users.*.phone,null',
             'users.*.name' => 'required',
-            'users.*.value' => new RequiredValue($request->input('users'), 'users.*.relationship'),
+            'users.*.value' => new RequiredValue($request->input('users') ?? [], 'users.*.relationship'),
             'proofs' => 'nullable|array',
             'proofs.*.src' => 'required',
             'proofs.*.type' => 'required',
